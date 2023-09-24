@@ -27,9 +27,8 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 audio_features = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                    'liveness','mode', 'speechiness', 'valence']
 
-# Spotipy can handle maximum 100 tracks in tracklist per API call
-MAX_TRACKS_PER_BATCH = 100
-
+# Spotipy can handle maximum 50 tracks in tracklist per API call
+MAX_TRACKS_PER_BATCH = 50
 
 def generate_track_list(track_compilation):
     """
@@ -281,6 +280,91 @@ def find_recommended_songs(track_compilation, input_genre):
     recommended_songs = list(map(lambda track: track['id'], recommended_songs))
 
     return recommended_songs
+
+
+def generate_duo_song_recommendations(first_track_compilation, second_track_compilation, disliked_genres, 
+                                    liked_genres):
+    """
+    Given two track compilations, musical genres the first Spotify user dislikes, and musical genres
+    the second Spotify user likes, this function uses decision tree classification to socialize 
+    Spotify's music recommendation system, returning a list of songs that hopefully both Spotify users
+    can appreciate
+
+    Inputs:
+        first_track_compilation (dictionary): an album or playlist of the first Spotify user
+        second_track_compilation (dictionary): an album or playlist of the second Spotify user
+        disliked_genres (list): a list of genres that the first Spotify user dislikes
+        liked_genres (list): a list of genres that the second Spotify user likes
+    
+    Returns: duo_song_recommendations (list): a list of recommended songs based on the input criteria of 
+        two distinct Spotify users, or at least two distinct track compilations
+    """
+    duo_song_recommendations = []
+
+    disliked_songs = []
+
+    for __ in range(4): # # Abitrary number of iterations of songs recommendations to fetch from Spotify API
+        tracklist = sp.recommendations(seed_genres = disliked_genres, limit = 100)['tracks']
+        
+        for track in tracklist:
+            disliked_songs.append(track['id'])
+    
+    disliked_songs_audio_statistics = create_audio_features_dataframe(disliked_songs, False)
+    disliked_songs_audio_statistics['like'] = 0 # Creating new categorical column to track song preference
+
+    liked_songs_audio_statistics = create_audio_features_dataframe(first_track_compilation)
+    liked_songs_audio_statistics['like'] = 1
+
+    # Training data
+    training_dataset = pd.concat([liked_songs_audio_statistics, disliked_songs_audio_statistics], axis=0)
+    pred_vars = training_dataset[audio_features]
+    dependent_var = training_dataset['like']
+
+    # Testing data
+    recommended_songs = find_recommended_songs(second_track_compilation, liked_genres)
+    testing_dataset = create_audio_features_dataframe(recommended_songs, False)
+
+    decision_tree = DecisionTreeClassifier(min_samples_split=100)
+    decision_tree.fit(pred_vars, dependent_var)
+
+    # Decision tree
+    dot_data = tree.export_graphviz(decision_tree, out_file=None,
+                                    feature_names = audio_features,
+                                    impurity=False,
+                                    rounded=True)
+    graph = pydotplus.graph_from_dot_data(dot_data)
+    graph.write_png("./static/tree.png")
+    
+    predictions = decision_tree.predict(testing_dataset)
+
+    testing_dataset['predictions'] = predictions
+    liked_songs_from_testing_dataset = testing_dataset[testing_dataset['predictions'] == 1]
+    tracklist = list(set(liked_songs_from_testing_dataset.index.tolist()))
+
+    # Process predicted songs in batches
+    predicted_songs = []
+
+    batches = len(tracklist) // MAX_TRACKS_PER_BATCH
+
+    if len(tracklist) % MAX_TRACKS_PER_BATCH != 0:
+        batches += 1
+    
+    for batch in range(batches):
+        predicted_songs += sp.tracks(tracklist[batch * 50: batch * 50 + 50])['tracks']
+    
+    if len(predicted_songs) > 0:
+        for song in predicted_songs[:30]:
+            song_information = (song['name'], song['artists'][0]['name'], 
+                          song['album']['name'], song['preview_url'])
+            duo_song_recommendations.append(song_information)
+    
+    return duo_song_recommendations
+    
+
+
+    
+
+
 
 
 
