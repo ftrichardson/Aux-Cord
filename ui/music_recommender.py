@@ -7,7 +7,6 @@ import pandas as pd
 
 import pydotplus
 
-import matplotlib
 import matplotlib.pyplot as plt
 
 from sklearn.tree import DecisionTreeClassifier
@@ -17,8 +16,12 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 
-CLIENT_ID = "f496ea2bb6d5495ea72c159979c02820"
-CLIENT_SECRET = "15c95a4e67f14caf9528c441482d705c"
+# Client credentials file in .gitignore for security purposes
+with open('res/client_credentials.json', 'r') as client_credentials_file:
+    client_credentials_data = json.load(client_credentials_file)
+
+CLIENT_ID = client_credentials_data["CLIENT_ID"]
+CLIENT_SECRET = client_credentials_data["CLIENT_SECRET"]
 
 client_credentials_manager = SpotifyClientCredentials(CLIENT_ID,CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -28,7 +31,8 @@ audio_features = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                    'liveness','mode', 'speechiness', 'valence']
 
 # Spotipy can handle maximum 50 tracks in tracklist per API call
-MAX_TRACKS_PER_BATCH = 50
+MAX_TRACKS_PER_BATCH = 100
+
 
 def generate_track_list(track_compilation):
     """
@@ -285,7 +289,7 @@ def find_recommended_songs(track_compilation, input_genre):
 def generate_duo_song_recommendations(first_track_compilation, second_track_compilation, disliked_genres, 
                                     liked_genres):
     """
-    Given two track compilations, musical genres the first Spotify user dislikes, and musical genres
+    Given 2 track compilations, musical genres the first Spotify user dislikes, and musical genres
     the second Spotify user likes, this function uses decision tree classification to socialize 
     Spotify's music recommendation system, returning a list of songs that hopefully both Spotify users
     can appreciate
@@ -359,22 +363,74 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
             duo_song_recommendations.append(song_information)
     
     return duo_song_recommendations
+
+
+def visualize_audio_features(first_track_compilation, second_track_compilation, audio_features_to_plot):
+    """
+    Given 2 track compilations, this function creates a histogram for each specified audio features
+    that compares the distribution of these audio features for the track compilations
+
+    Inputs:
+        first_track_compilation (dictionary): an album or playlist of the first Spotify user
+        second_track_compilation (dictionary): an album or playlist of the second Spotify user
+        audio_features_to_plot (list): a list of audio features to plot
     
+    Returns: None (creates and saves histogram(s) in static directory)
+    """
+    first_track_compilation_audio_statistics = create_audio_features_dataframe(first_track_compilation)
+    second_track_compilation_audio_statistics = create_audio_features_dataframe(second_track_compilation)
+
+    for audio_feature in audio_features_to_plot:
+        fig = plt.figure()
+        first_track_compilation_feature_distribution = first_track_compilation_audio_statistics[audio_feature]
+        second_track_compilation_feature_distribution = second_track_compilation_audio_statistics[audio_feature]
+        audio_feature_histogram = fig.add_subplot(1, 1, 1)
+        audio_feature_histogram.hist([first_track_compilation_feature_distribution, second_track_compilation_feature_distribution], 
+                                    bins = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], 
+                                    alpha = 0.5, density = True, 
+                                    label = ['User 1', 'User 2'], 
+                                    color = ['c', 'm'])
+        audio_feature_histogram.legend(loc='upper right')
+        audio_feature_histogram.set_xlim([0, 1])
+        audio_feature_histogram.get_yaxis().set_visible(False)
+        audio_feature_histogram.set_title(audio_feature.capitalize(), fontsize=25)
+        audio_feature_histogram_file = "./static/"+audio_feature+"_plot.png"
+        if os.path.isfile(audio_feature_histogram_file):
+            os.remove(audio_feature_histogram_file)
+        plt.savefig(audio_feature_histogram_file)
 
 
+def generate_playlist(user_inputs):
+    """
+    Based on user inputs and the decision tree algorithm, this function 
+    creates an independent playlist
     
+    Inputs:
+        user_inputs (dictionary): user inputs
+    
+    Returns: playlist (list): a list of songs and their associated information
+    """
+    first_track_compilation = sp.playlist(user_inputs['first_track_compilation'])
+    second_track_compilation = sp.playlist(user_inputs['second_track_compilation'])
+    disliked_genres = user_inputs['disliked_genres']
+    first_user_preferred_genre = user_inputs['first_user_preferred_genre']
+    second_user_preferred_genre = user_inputs['second_user_preferred_genre']
+    features_to_plot = user_inputs['features_to_plot']
 
+    # Ensure no repeated songs
+    playlist = set()
+    for __ in range(4):
+        while len(playlist) <= 5:
+            for duo_song_recommendation in generate_duo_song_recommendations(first_track_compilation, 
+                                                    second_track_compilation, disliked_genres, second_user_preferred_genre):
+                playlist.add(duo_song_recommendation)
+            for duo_song_recommendation in generate_duo_song_recommendations(second_track_compilation, 
+                                                    first_track_compilation, disliked_genres, first_user_preferred_genre):
+                playlist.add(duo_song_recommendation)
 
+    # If users specified features to plot, handle that
+    if len(features_to_plot) > 0:
+        visualize_audio_features(first_track_compilation, second_track_compilation, features_to_plot)
 
-
-
-
-
-
-
-
-
-
-
-
-
+    # Return playlist
+    return list(playlist)

@@ -4,3 +4,4 @@ spotipy==2.20.0
 pydotplus==2.0.2
 scikit-learn==1.0.2
 matplotlib==3.5.1
+numpy==1.22.2

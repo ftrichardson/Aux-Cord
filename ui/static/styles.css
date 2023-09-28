@@ -1,0 +1,136 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    background-color: silver;
+}
+
+.welcome-text {
+    padding-top: 80px;
+    text-align: center;
+    animation: fade-in 2s ease-in-out;
+}
+
+.directions-container {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
+    width: 700px;
+    margin-top: 50px;
+}
+
+form h1 {
+    color: white;
+    font-weight: bold;
+}
+
+form > div, .user-1, .user-2 {
+    height: 300px;
+    width: 250px;
+    border: 2px solid;
+    border-radius: 15px;
+}
+
+/* User 1 Styles */
+.user-1 {
+    background-color: black;
+    text-align: center;
+}
+
+.user-1-playlist-container {
+    width: 180px;
+    border: 4px solid;
+    border-color: white;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.user-1-playlist-container::placeholder {
+    text-align: center;
+    color: black;
+    opacity: 0.3;
+}
+
+.user-1-playlist-container:hover {
+    cursor: pointer;
+}
+
+.user-1-genres {
+    display: block;
+    margin-top: 10px;
+}
+
+/* User 2 Styles */
+.user-2 {
+    background-color: black;
+    text-align: center;
+}
+
+.user-2-playlist-container {
+    width: 180px;
+    border: 4px solid;
+    border-color: white;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.user-2-playlist-container::placeholder {
+    text-align: center;
+    color: black;
+    opacity: 0.3;
+}
+
+.user-2-playlist-container:hover {
+    cursor: pointer;
+}
+
+.user-2-genres {
+    display: block;
+    margin-top: 10px;
+}
+
+img {
+    z-index: 1; /* Place images above other elements */
+}
+
+.generate-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.generate-button {
+    border: 2px solid;
+    border-color: black;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    width: 100px;
+    height: 30px;
+}
+
+.generate-button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
