@@ -1,16 +1,9 @@
 # Music Recommendation Algorithm
-
-import os
 import json
-
 import pandas as pd
-
-import pydotplus
-
-import matplotlib.pyplot as plt
-
+import requests
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import tree
+
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -31,7 +24,7 @@ audio_features = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                    'liveness','mode', 'speechiness', 'valence']
 
 # Spotipy can handle maximum 50 tracks in tracklist per API call
-MAX_TRACKS_PER_BATCH = 100
+MAX_TRACKS_PER_BATCH = 50
 
 
 def generate_track_list(track_compilation):
@@ -258,8 +251,14 @@ def find_recommended_songs(track_compilation, input_genre):
     recommended_songs = []
     song_selection_criteria = generate_song_selection_criteria(find_highest_intervals(track_compilation), 0)
 
+    if len(song_selection_criteria) == 1:
+        max_recommendations = 100
+    else:
+        max_recommendations = 128 // len(song_selection_criteria)
+
     # Use new_release to prioritize more recent songs
-    recommended_songs.extend(sp.recommendations(seed_genres=input_genre + ['new_release'],
+    try:
+        recommended_songs.extend(sp.recommendations(seed_genres=input_genre + ['new_release'],
                                             target_acousticness=song_selection_criteria[0][0],
                                             target_danceability=song_selection_criteria[0][1],
                                             target_energy=song_selection_criteria[0][2],
@@ -268,10 +267,22 @@ def find_recommended_songs(track_compilation, input_genre):
                                             target_mode=song_selection_criteria[0][5],
                                             target_speechiness=song_selection_criteria[0][6],
                                             target_valence=song_selection_criteria[0][7], limit=100)['tracks'])
-    
+    except requests.exceptions.ReadTimeout:
+        print('Spotify timed out...trying again')
+        recommended_songs.extend(sp.recommendations(seed_genres=input_genre + ['new_release'],
+                                            target_acousticness=song_selection_criteria[0][0],
+                                            target_danceability=song_selection_criteria[0][1],
+                                            target_energy=song_selection_criteria[0][2],
+                                            target_intrumentalness=song_selection_criteria[0][3],
+                                            target_liveness=song_selection_criteria[0][4],
+                                            target_mode=song_selection_criteria[0][5],
+                                            target_speechiness=song_selection_criteria[0][6],
+                                            target_valence=song_selection_criteria[0][7], limit=100)['tracks'])
+
 
     for song_selection_criterion in song_selection_criteria:
-        recommended_songs.extend(sp.recommendations(seed_tracks=generate_track_list(track_compilation)[:5],
+        try:
+            recommended_songs.extend(sp.recommendations(seed_tracks=generate_track_list(track_compilation)[:5],
                                        target_acousticness=song_selection_criterion[0],
                                        target_danceability=song_selection_criterion[1],
                                        target_energy=song_selection_criterion[2],
@@ -279,7 +290,18 @@ def find_recommended_songs(track_compilation, input_genre):
                                        target_liveness=song_selection_criterion[4],
                                        target_mode=song_selection_criterion[5],
                                        target_speechiness=song_selection_criterion[6],
-                                       target_valence=song_selection_criterion[7], limit=100)['tracks'])
+                                       target_valence=song_selection_criterion[7], limit=max_recommendations)['tracks'])
+        except requests.exceptions.ReadTimeout:
+            print('Spotify timed out...trying again')
+            recommended_songs.extend(sp.recommendations(seed_tracks=generate_track_list(track_compilation)[:5],
+                                       target_acousticness=song_selection_criterion[0],
+                                       target_danceability=song_selection_criterion[1],
+                                       target_energy=song_selection_criterion[2],
+                                       target_intrumentalness=song_selection_criterion[3],
+                                       target_liveness=song_selection_criterion[4],
+                                       target_mode=song_selection_criterion[5],
+                                       target_speechiness=song_selection_criterion[6],
+                                       target_valence=song_selection_criterion[7], limit=max_recommendations)['tracks'])
     
     recommended_songs = list(map(lambda track: track['id'], recommended_songs))
 
@@ -287,7 +309,7 @@ def find_recommended_songs(track_compilation, input_genre):
 
 
 def generate_duo_song_recommendations(first_track_compilation, second_track_compilation, disliked_genres, 
-                                    liked_genres):
+                                    liked_genre):
     """
     Given 2 track compilations, musical genres the first Spotify user dislikes, and musical genres
     the second Spotify user likes, this function uses decision tree classification to socialize 
@@ -298,7 +320,7 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
         first_track_compilation (dictionary): an album or playlist of the first Spotify user
         second_track_compilation (dictionary): an album or playlist of the second Spotify user
         disliked_genres (list): a list of genres that the first Spotify user dislikes
-        liked_genres (list): a list of genres that the second Spotify user likes
+        liked_genre (list): a list of genres that the second Spotify user likes
     
     Returns: duo_song_recommendations (list): a list of recommended songs based on the input criteria of 
         two distinct Spotify users, or at least two distinct track compilations
@@ -308,8 +330,12 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
     disliked_songs = []
 
     for __ in range(4): # # Abitrary number of iterations of songs recommendations to fetch from Spotify API
-        tracklist = sp.recommendations(seed_genres = disliked_genres, limit = 100)['tracks']
-        
+        try:
+            tracklist = sp.recommendations(seed_genres = disliked_genres, limit=100)['tracks']
+        except requests.exceptions.ReadTimeout:
+            print('Spotify timed out...trying again')
+            tracklist = sp.recommendations(seed_genres = disliked_genres, limit=100)['tracks']
+    
         for track in tracklist:
             disliked_songs.append(track['id'])
     
@@ -325,20 +351,11 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
     dependent_var = training_dataset['like']
 
     # Testing data
-    recommended_songs = find_recommended_songs(second_track_compilation, liked_genres)
+    recommended_songs = find_recommended_songs(second_track_compilation, liked_genre)
     testing_dataset = create_audio_features_dataframe(recommended_songs, False)
 
     decision_tree = DecisionTreeClassifier(min_samples_split=100)
     decision_tree.fit(pred_vars, dependent_var)
-
-    # Decision tree
-    dot_data = tree.export_graphviz(decision_tree, out_file=None,
-                                    feature_names = audio_features,
-                                    impurity=False,
-                                    rounded=True)
-    graph = pydotplus.graph_from_dot_data(dot_data)
-    graph.write_png("./static/tree.png")
-    
     predictions = decision_tree.predict(testing_dataset)
 
     testing_dataset['predictions'] = predictions
@@ -365,41 +382,6 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
     return duo_song_recommendations
 
 
-def visualize_audio_features(first_track_compilation, second_track_compilation, audio_features_to_plot):
-    """
-    Given 2 track compilations, this function creates a histogram for each specified audio features
-    that compares the distribution of these audio features for the track compilations
-
-    Inputs:
-        first_track_compilation (dictionary): an album or playlist of the first Spotify user
-        second_track_compilation (dictionary): an album or playlist of the second Spotify user
-        audio_features_to_plot (list): a list of audio features to plot
-    
-    Returns: None (creates and saves histogram(s) in static directory)
-    """
-    first_track_compilation_audio_statistics = create_audio_features_dataframe(first_track_compilation)
-    second_track_compilation_audio_statistics = create_audio_features_dataframe(second_track_compilation)
-
-    for audio_feature in audio_features_to_plot:
-        fig = plt.figure()
-        first_track_compilation_feature_distribution = first_track_compilation_audio_statistics[audio_feature]
-        second_track_compilation_feature_distribution = second_track_compilation_audio_statistics[audio_feature]
-        audio_feature_histogram = fig.add_subplot(1, 1, 1)
-        audio_feature_histogram.hist([first_track_compilation_feature_distribution, second_track_compilation_feature_distribution], 
-                                    bins = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], 
-                                    alpha = 0.5, density = True, 
-                                    label = ['User 1', 'User 2'], 
-                                    color = ['c', 'm'])
-        audio_feature_histogram.legend(loc='upper right')
-        audio_feature_histogram.set_xlim([0, 1])
-        audio_feature_histogram.get_yaxis().set_visible(False)
-        audio_feature_histogram.set_title(audio_feature.capitalize(), fontsize=25)
-        audio_feature_histogram_file = "./static/"+audio_feature+"_plot.png"
-        if os.path.isfile(audio_feature_histogram_file):
-            os.remove(audio_feature_histogram_file)
-        plt.savefig(audio_feature_histogram_file)
-
-
 def generate_playlist(user_inputs):
     """
     Based on user inputs and the decision tree algorithm, this function 
@@ -415,7 +397,6 @@ def generate_playlist(user_inputs):
     disliked_genres = user_inputs['disliked_genres']
     first_user_preferred_genre = user_inputs['first_user_preferred_genre']
     second_user_preferred_genre = user_inputs['second_user_preferred_genre']
-    features_to_plot = user_inputs['features_to_plot']
 
     # Ensure no repeated songs
     playlist = set()
@@ -427,10 +408,6 @@ def generate_playlist(user_inputs):
             for duo_song_recommendation in generate_duo_song_recommendations(second_track_compilation, 
                                                     first_track_compilation, disliked_genres, first_user_preferred_genre):
                 playlist.add(duo_song_recommendation)
-
-    # If users specified features to plot, handle that
-    if len(features_to_plot) > 0:
-        visualize_audio_features(first_track_compilation, second_track_compilation, features_to_plot)
 
     # Return playlist
     return list(playlist)
