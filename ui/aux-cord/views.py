@@ -6,7 +6,6 @@ from django import forms
 
 from music_recommender import generate_playlist
 
-NOPREF_STR = '...'
 RES_DIR = os.path.join(os.path.dirname(__file__), '..', 'res')
 
 
@@ -24,11 +23,10 @@ def _load_res_column(filename, col=0):
 
 def _build_dropdown(options):
     """Convert a list to (value, caption) tuples."""
-    return [(x, x) if x is not None else ('', NOPREF_STR) for x in options]
+    return [(x, x) if x is not None else ('', '') for x in options]
 
 
 GENRES = _build_dropdown([None] + _load_res_column('genres.csv'))
-AUDIO_FEATURES = _build_dropdown(_load_res_column('features.csv'))
 
 
 class SearchForm(forms.Form):
@@ -70,15 +68,6 @@ class SearchForm(forms.Form):
                                     choices=GENRES,
                                     required=False)
     
-    # Visualizations (Optional)
-    features_to_plot = forms.MultipleChoiceField(label='Visualize audio features... (Optional)',
-                                        choices=AUDIO_FEATURES,
-                                        widget=forms.CheckboxSelectMultiple,
-                                        required=False)
-    
-    decision_tree = forms.BooleanField(label='Visualize decision tree...(Optional)',
-                                            required=False)
-    
 
 def home(request):
     """Generates the home page of Aux Cord"""
@@ -95,8 +84,8 @@ def home(request):
             user_inputs['second_track_compilation'] = form.cleaned_data['user_2_playlist']
 
             # Disliked and preferred genres
-            user_inputs['first_user_preferred_genre'] = list(form.cleaned_data['user_1_preferred_genre'])
-            user_inputs['second_user_preferred_genre'] = list(form.cleaned_data['user_2_preferred_genre'])
+            user_inputs['first_user_preferred_genre'] = [form.cleaned_data['user_1_preferred_genre']]
+            user_inputs['second_user_preferred_genre'] = [form.cleaned_data['user_2_preferred_genre']]
 
             user_inputs['disliked_genres'] = []
             user_inputs['disliked_genres'].append(form.cleaned_data['user_1_disliked_genre_required'])
@@ -106,14 +95,10 @@ def home(request):
             if form.cleaned_data['user_2_disliked_genre_optional']:
                 user_inputs['disliked_genres'].append(form.cleaned_data['user_2_disliked_genre_optional'])
 
-            # Visualizations
-            user_inputs['features_to_plot'] = form.cleaned_data['features_to_plot']
-            user_inputs['decision_tree'] = form.cleaned_data['decision_tree']
-
             # Finally...validate user inputs
             is_user_inputs_valid = True
-            for key, value in user_inputs.items():
-                if len(value) == 0 and key != 'features_to_plot':
+            for __, value in user_inputs.items():
+                if len(value) == 0:
                     is_user_inputs_valid = False
             
             if is_user_inputs_valid:
@@ -124,15 +109,9 @@ def home(request):
 
     if output_playlist == None:
         context['output_playlist'] = None
-        context['features_to_plot'] = None
-        context['decision_tree'] = False
     else:
         context['output_playlist'] = output_playlist
-        context['features_to_plot'] = True
-        for audio_feature in user_inputs['features_to_plot']:
-            context[audio_feature] = True
-        context['decision_tree'] = user_inputs['decision_tree']
-        context['columns'] = ['Track', 'Artist', 'Album', '30s Preview URL']
+        context['columns'] = ['Track', 'Artist', 'Album', 'Preview']
     
     context['form'] = form
     return render(request, 'index.html', context)
