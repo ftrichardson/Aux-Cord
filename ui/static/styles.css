@@ -3,8 +3,6 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    background-color: silver;
 }
 
 .welcome-text {
@@ -32,7 +30,6 @@ form {
 
 form h1 {
     color: white;
-    font-weight: bold;
 }
 
 form > div, .user-1, .user-2 {
@@ -70,6 +67,7 @@ form > div, .user-1, .user-2 {
 .user-1-genres {
     display: block;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* User 2 Styles */
@@ -100,6 +98,7 @@ form > div, .user-1, .user-2 {
 .user-2-genres {
     display: block;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 img {
@@ -110,16 +109,20 @@ img {
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    padding-bottom: 40px;
 }
 
 .generate-button {
     border: 2px solid;
-    border-color: black;
+    border-color: #e7d64e;
     border-radius: 10px;
+    background-color: black;
+    color: white;
     font-family: 'Roboto', sans-serif;
+    font-size: 22px;
     font-weight: 700;
-    width: 100px;
-    height: 30px;
+    width: 125px;
+    height: 75px;
 }
 
 .generate-button:hover {
@@ -175,5 +178,5 @@ tbody tr:nth-of-type(even) {
 }
 
 tbody tr:last-of-type {
-    border-bottom: 2px solid #5da585;
+    border-bottom: 1px solid black;
 }
