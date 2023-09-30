@@ -5,8 +5,13 @@ html, body {
     font-family: 'Roboto', sans-serif;
 }
 
+header {
+    display: flex;
+}
+
 .welcome-text {
     padding-top: 80px;
+    padding-bottom: 10px;
     text-align: center;
     animation: fade-in 2s ease-in-out;
 }
