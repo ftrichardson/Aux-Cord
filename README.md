@@ -1,5 +1,4 @@
-![aux-cord-banner](https://github.com/ftrichardson/aux-cord/assets/141296571/83136ca4-7b8a-4b76-a0df-086c377da87a)
-
+![aux-cord-banner-updated](https://github.com/ftrichardson/aux-cord/assets/141296571/ba00f7bd-da3d-48f3-8a29-d2c75a70cc95)
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#third-party-libraries-used">Third-Party Libraries Used</a> •
