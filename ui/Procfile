@@ -1,0 +1,1 @@
+web gunicorn aux-cord.wsgi:application --log-file -

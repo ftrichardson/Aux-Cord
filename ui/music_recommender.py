@@ -17,7 +17,7 @@ CLIENT_ID = client_credentials_data["CLIENT_ID"]
 CLIENT_SECRET = client_credentials_data["CLIENT_SECRET"]
 
 client_credentials_manager = SpotifyClientCredentials(CLIENT_ID,CLIENT_SECRET)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager, requests_timeout=60, retries=10)
 
 
 audio_features = ['acousticness', 'danceability', 'energy', 'instrumentalness',

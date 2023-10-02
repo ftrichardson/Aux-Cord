@@ -3,15 +3,18 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: black;
 }
 
 header {
     display: flex;
+    justify-content: left;
 }
 
 .welcome-text {
     padding-top: 80px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    color: white;
     text-align: center;
     animation: fade-in 2s ease-in-out;
 }
@@ -47,6 +50,8 @@ form > div, .user-1, .user-2 {
 /* User 1 Styles */
 .user-1 {
     background-color: black;
+    border: 2px solid;
+    border-color: #e7d64e;
     text-align: center;
 }
 
@@ -78,6 +83,8 @@ form > div, .user-1, .user-2 {
 /* User 2 Styles */
 .user-2 {
     background-color: black;
+    border: 2px solid;
+    border-color: #e7d64e;
     text-align: center;
 }
 
@@ -163,7 +170,7 @@ table {
 }
 
 thead tr {
-    background-color: green;
+    background-color: black;
     opacity: 0.8;
     color: white;
 }
@@ -179,7 +186,13 @@ tbody tr {
 }
 
 tbody tr:nth-of-type(even) {
-    background-color: white;
+    background-color: black;
+    opacity: 0.8;
+    color: white;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: gold;
 }
 
 tbody tr:last-of-type {
