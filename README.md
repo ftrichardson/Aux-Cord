@@ -1,9 +1,19 @@
 ![aux-cord-banner-updated](https://github.com/ftrichardson/aux-cord/assets/141296571/ba00f7bd-da3d-48f3-8a29-d2c75a70cc95)
-<p align="center">
-  <a href="#description">Description</a> •
-  <a href="#third-party-libraries-used">Third-Party Libraries Used</a> •
-  <a href="#demo">Demo</a> •
+## Table of Contents
+<p>
+  <a href="#description">Description</a>
+</p>
+<p>
+  <a href="#third-party-libraries-used">Third-Party Libraries Used</a>
+</p>
+<p>
+  <a href="#demo">Demo</a>
+</p>
+<p>
   <a href="#installation">Installation</a>
+</p>
+<p>
+  <a href="#plans">Plans</a>
 </p>
 
 ## Description
@@ -53,3 +63,5 @@ python manage.py runserver
 
 **6.** Open your web browser and visit <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> to access the application.
 
+## Plans
+I am currently working on adding a feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
