@@ -46,6 +46,7 @@ geopandas==0.12.1
 geopy==2.2.0
 glcontext==2.3.4
 graphviz==0.19.1
+gunicorn==21.2.0
 html5lib==1.0b10
 idna==3.3
 imageio==2.16.0
