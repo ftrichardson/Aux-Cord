@@ -26,7 +26,8 @@ This program socializes Spotify’s music recommendation system by using machine
 * spotipy
 
 ## Demo
-https://github.com/ftrichardson/aux-cord/assets/141296571/1a4598e4-10fb-47b4-ab1f-e516036f7fe5
+https://github.com/ftrichardson/aux-cord/assets/141296571/ad2975a1-bdd8-4794-bb99-ccfaad2b5ae6
+
 
 
 
