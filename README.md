@@ -17,7 +17,7 @@
 </p>
 
 ## Description
-This program socializes Spotify’s music recommendation system by using machine learning to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
+This program socializes Spotify’s music recommendation system by using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
 
 ## Third-Party Libraries Used
 * pandas
