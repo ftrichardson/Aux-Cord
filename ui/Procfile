@@ -1,1 +1,0 @@
-web: gunicorn aux_cord.wsgi
