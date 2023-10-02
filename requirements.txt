@@ -63,8 +63,6 @@ joblib==1.1.0
 Js2Py==0.74
 kiwisolver==1.4.2
 lassie==0.11.11
-manim==0.17.3
-ManimPango==0.4.0.post2
 mapbox-earcut==1.0.1
 MarkupSafe==2.1.2
 matplotlib==3.5.1
