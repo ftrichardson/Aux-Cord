@@ -28,9 +28,6 @@ This program socializes Spotify’s music recommendation system by using machine
 ## Demo
 https://github.com/ftrichardson/aux-cord/assets/141296571/ad2975a1-bdd8-4794-bb99-ccfaad2b5ae6
 
-
-
-
 ## Installation
 
 **1.** Clone the repository and navigate to aux-cord/ui directory
@@ -65,4 +62,4 @@ python manage.py runserver
 **6.** Open your web browser and visit <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> to access the application.
 
 ## Plans
-I am currently working on adding a feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
+I am currently working on fixing feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature should allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
