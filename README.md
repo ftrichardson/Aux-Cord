@@ -17,18 +17,17 @@
 </p>
 
 ## Description
-This program socializes Spotify’s music recommendation system by using machine learning to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
+This program socializes Spotify’s music recommendation system by using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
 
 ## Third-Party Libraries Used
 * pandas
 * scikit-learn
 * requests
 * spotipy
+* matplotlib
 
 ## Demo
-https://github.com/ftrichardson/aux-cord/assets/141296571/1a4598e4-10fb-47b4-ab1f-e516036f7fe5
-
-
+https://github.com/ftrichardson/aux-cord/assets/141296571/ad2975a1-bdd8-4794-bb99-ccfaad2b5ae6
 
 ## Installation
 
@@ -64,4 +63,4 @@ python manage.py runserver
 **6.** Open your web browser and visit <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> to access the application.
 
 ## Plans
-I am currently working on adding a feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
+I am currently working on fixing feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature should allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
