@@ -27,6 +27,7 @@ def _build_dropdown(options):
 
 
 GENRES = _build_dropdown([None] + _load_res_column('genres.csv'))
+AUDIO_FEATURES = _build_dropdown(_load_res_column('audio_features.csv'))
 
 
 class SearchForm(forms.Form):
@@ -111,6 +112,8 @@ def home(request):
         context['output_playlist'] = None
     else:
         context['output_playlist'] = output_playlist
+        context['audio_features'] = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                   'liveness', 'speechiness', 'valence']
         context['columns'] = ['Track', 'Artist', 'Album', 'Preview']
     
     context['form'] = form

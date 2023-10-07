@@ -1,7 +1,11 @@
 # Music Recommendation Algorithm
 import json
+import os
 import pandas as pd
 import requests
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 
 
@@ -17,7 +21,7 @@ CLIENT_ID = client_credentials_data["CLIENT_ID"]
 CLIENT_SECRET = client_credentials_data["CLIENT_SECRET"]
 
 client_credentials_manager = SpotifyClientCredentials(CLIENT_ID,CLIENT_SECRET)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager, requests_timeout=60, retries=10)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
 audio_features = ['acousticness', 'danceability', 'energy', 'instrumentalness',
@@ -382,6 +386,41 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
     return duo_song_recommendations
 
 
+def visualize_audio_features(first_track_compilation, second_track_compilation, audio_features_to_plot):
+    """
+    Given 2 track compilations, this function creates a histogram for each specified audio features
+    that compares the distribution of these audio features for the track compilations
+
+    Inputs:
+        first_track_compilation (dictionary): an album or playlist of the first Spotify user
+        second_track_compilation (dictionary): an album or playlist of the second Spotify user
+        audio_features_to_plot (list): a list of audio features to plot
+    
+    Returns: None (creates and saves histogram(s) in static directory)
+    """
+    first_track_compilation_audio_statistics = create_audio_features_dataframe(first_track_compilation)
+    second_track_compilation_audio_statistics = create_audio_features_dataframe(second_track_compilation)
+
+    for audio_feature in audio_features_to_plot:
+        fig = plt.figure()
+        first_track_compilation_feature_distribution = first_track_compilation_audio_statistics[audio_feature]
+        second_track_compilation_feature_distribution = second_track_compilation_audio_statistics[audio_feature]
+        audio_feature_histogram = fig.add_subplot(1, 1, 1)
+        audio_feature_histogram.hist([first_track_compilation_feature_distribution, second_track_compilation_feature_distribution], 
+                                    bins = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], 
+                                    alpha = 0.5, density = True, 
+                                    label = ['User 1', 'User 2'], 
+                                    color = ['c', 'm'])
+        audio_feature_histogram.legend(loc='upper right')
+        audio_feature_histogram.set_xlim([0, 1])
+        audio_feature_histogram.get_yaxis().set_visible(False)
+        audio_feature_histogram.set_title(audio_feature.capitalize(), fontsize=25)
+        audio_feature_histogram_file = "./static/"+audio_feature+"_plot.png"
+        if os.path.isfile(audio_feature_histogram_file):
+            os.remove(audio_feature_histogram_file)
+        plt.savefig(audio_feature_histogram_file)
+
+
 def generate_playlist(user_inputs):
     """
     Based on user inputs and the decision tree algorithm, this function 
@@ -397,6 +436,8 @@ def generate_playlist(user_inputs):
     disliked_genres = user_inputs['disliked_genres']
     first_user_preferred_genre = user_inputs['first_user_preferred_genre']
     second_user_preferred_genre = user_inputs['second_user_preferred_genre']
+    features_to_plot = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                   'liveness', 'speechiness', 'valence']
 
     # Ensure no repeated songs
     playlist = set()
@@ -408,6 +449,8 @@ def generate_playlist(user_inputs):
             for duo_song_recommendation in generate_duo_song_recommendations(second_track_compilation, 
                                                     first_track_compilation, disliked_genres, first_user_preferred_genre):
                 playlist.add(duo_song_recommendation)
+
+    visualize_audio_features(first_track_compilation, second_track_compilation, features_to_plot)
 
     # Return playlist
     return list(playlist)
