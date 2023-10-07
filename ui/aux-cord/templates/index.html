@@ -80,5 +80,18 @@
             </table>
         {% endif %}
         </div>
+        <div class="audio-feature-graphs-container">
+        </div>
+        {% for feature in audio_features %}
+            <div class="audio-feature-graphs">
+                <img src="{% static 'acousticness_plot.png' %}" width="350">
+                <img src="{% static 'danceability_plot.png' %}" width="350">
+                <img src="{% static 'energy_plot.png' %}" width="350">
+                <img src="{% static 'instrumentalness_plot.png' %}" width="350">
+                <img src="{% static 'liveness_plot.png' %}" width="350">
+                <img src="{% static 'speechiness_plot.png' %}" width="350">
+                <img src="{% static 'valence_plot.png' %}" width="350">
+            </div>
+        {% endfor %}
     </body>
 </html>
