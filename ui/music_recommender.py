@@ -335,7 +335,9 @@ def generate_duo_song_recommendations(first_track_compilation, second_track_comp
 
     for __ in range(4): # # Abitrary number of iterations of songs recommendations to fetch from Spotify API
         try:
+            print('O')
             tracklist = sp.recommendations(seed_genres = disliked_genres, limit=100)['tracks']
+            print('OK')
         except requests.exceptions.ReadTimeout:
             print('Spotify timed out...trying again')
             tracklist = sp.recommendations(seed_genres = disliked_genres, limit=100)['tracks']
