@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 **4.** Set up migrations
 ```python
-python manage.pr migrate
+python manage.py migrate
 ```
 
 **5.** Start project's development server
