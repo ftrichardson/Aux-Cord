@@ -187,3 +187,8 @@ tbody tr {
     color: white;
     font-weight: 100;
 }
+
+/* Audio Features Container */
+.audio-features-graph-container {
+    text-align: center;
+}

@@ -112,8 +112,7 @@ def home(request):
         context['output_playlist'] = None
     else:
         context['output_playlist'] = output_playlist
-        context['audio_features'] = ['acousticness', 'danceability', 'energy', 'instrumentalness',
-                   'liveness', 'speechiness', 'valence']
+        context['audio_features'] = True
         context['columns'] = ['Track', 'Artist', 'Album', 'Preview']
     
     context['form'] = form

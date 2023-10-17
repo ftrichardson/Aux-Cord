@@ -81,7 +81,7 @@
         {% endif %}
         </div>
         <div class="audio-feature-graphs-container">
-        {% for feature in audio_features %}
+        {% if audio_features %}
             <img src="{% static 'acousticness_plot.png' %}" width="350">
             <img src="{% static 'danceability_plot.png' %}" width="350">
             <img src="{% static 'energy_plot.png' %}" width="350">
@@ -89,7 +89,7 @@
             <img src="{% static 'liveness_plot.png' %}" width="350">
             <img src="{% static 'speechiness_plot.png' %}" width="350">
             <img src="{% static 'valence_plot.png' %}" width="350">
-        {% endfor %}
+        {% endif %}
         </div>
     </body>
 </html>
