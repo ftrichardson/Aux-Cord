@@ -14,7 +14,7 @@
                 genre selections (in order): preferred, disliked, and an optional disliked. <br> Then, click “Generate” and find music that both you and your friend(s) can enjoy!<h2>
         </div>
         <main>
-            <form id="playlist-generator" method="GET" action="{% url 'home' %}">
+            <form id="playlist-generator" method="GET" action="{% url 'home' %}" autocomplete="off">
                 {% csrf_token %}
                 <div class="user-1">
                     <h1>User 1</h1>
