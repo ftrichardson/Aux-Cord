@@ -1,4 +1,4 @@
-django==4.2.5
+django>=2.0
 pandas==1.4.1
 spotipy==2.23.0
 requests==2.31.0
