@@ -64,4 +64,4 @@ python manage.py runserver
 **6.** Open your web browser and visit <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> to access the application.
 
 ## Plans
-I am currently working on fixing feature so users can visualize their musical preferences via graphical representations of their playlists' audio statistics. This feature should allow users to compare with other users what they tend to value more in songs, at least according to Spotify (i.e. danceability, instrumentalness, etc.).
+I fixed the problem with the matplotlib features, so now users can visualize their musical preferences via graphical representations of their playlists' audio statistics. The next step is to make the spacing and colors look nicer and add cool effects and organization to the website. 
