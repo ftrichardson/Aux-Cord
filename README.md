@@ -27,6 +27,11 @@ This program socializes Spotify’s music recommendation system by using machine
 * spotipy
 * matplotlib
 
+## Demo
+
+https://github.com/ftrichardson/aux-cord/assets/141296571/deda1565-3119-47c6-8b73-e72ab9633f1d
+
+
 ## Installation
 
 **1.** Clone the repository and navigate to aux-cord/ui directory
