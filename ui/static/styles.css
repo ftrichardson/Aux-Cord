@@ -2,7 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Raleway', sans-serif;
     background-color: black;
 }
 
@@ -16,6 +16,7 @@ header {
     padding-bottom: 20px;
     color: white;
     text-align: center;
+    font-family: "Merriweather Sans", sans-serif;
     animation: fade-in 2s ease-in-out;
 }
 
@@ -130,7 +131,6 @@ img {
     border-radius: 10px;
     background-color: black;
     color: white;
-    font-family: 'Roboto', sans-serif;
     font-size: 22px;
     font-weight: 700;
     width: 125px;
