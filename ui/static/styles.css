@@ -16,7 +16,7 @@ header {
     padding-bottom: 20px;
     color: white;
     text-align: center;
-    font-family: "Merriweather Sans", sans-serif;
+    font-family: "Merriweather Sans";
     animation: fade-in 2s ease-in-out;
 }
 
@@ -161,7 +161,7 @@ table {
     width: 90%;
     margin: 25px 0;
     border-radius: 5px 5px 0 0;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
     font-size: 16px;
     text-align: left;
     border-collapse: collapse;
