@@ -1,4 +1,5 @@
-![aux-cord-banner-updated](https://github.com/ftrichardson/aux-cord/assets/141296571/ba00f7bd-da3d-48f3-8a29-d2c75a70cc95)
+![Aux Cord (4)](https://github.com/ftrichardson/aux-cord/assets/141296571/1a170f61-6c0e-4255-8be9-4f739c7fa45f)
+
 **Now live! Try it out with a friend here: https://aux-cord.onrender.com/
 ## Table of Contents
 <p>
