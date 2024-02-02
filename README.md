@@ -12,7 +12,7 @@
   <a href="#demo">Demo</a>
 </p>
 <p>
-  <a href="#installation">Installation</a>
+  <a href="#local-installation">Installation</a>
 </p>
 
 ## Description
@@ -23,14 +23,13 @@ This program socializes Spotify’s music recommendation system by using machine
 * scikit-learn
 * requests
 * spotipy
-* matplotlib
 
 ## Demo
 
 https://github.com/ftrichardson/aux-cord/assets/141296571/deda1565-3119-47c6-8b73-e72ab9633f1d
 
 
-## Installation
+## Local Installation
 
 **1.** Clone the repository and navigate to aux-cord/ui directory
 ```python
