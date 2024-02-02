@@ -14,9 +14,6 @@
 <p>
   <a href="#installation">Installation</a>
 </p>
-<p>
-  <a href="#plans">Plans</a>
-</p>
 
 ## Description
 This program socializes Spotify’s music recommendation system by using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
@@ -65,6 +62,3 @@ python manage.py runserver
 ```
 
 **6.** Open your web browser and visit <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> to access the application.
-
-## Plans
-I fixed the problem with the matplotlib features, so now users can visualize their musical preferences via graphical representations of their playlists' audio statistics. However, the next step is to make the spacing and colors look nicer and add cool effects and organization to the website. 
