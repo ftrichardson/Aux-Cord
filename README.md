@@ -1,4 +1,11 @@
 <h1>Aux Cord - socializing music recommendation </h1>
+<table>
+<tr>
+<td>
+  A webapp using Quandl API to display history of stock growth in a given period of time. It helps predict the growth of stocks from the  charts of stock performace in any period of time. It helps to judge stocks, with the principle of momentum investing, which returns 1% per month on average.
+</td>
+</tr>
+</table>
 <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b>
 <img width="1362" alt="Screen Shot 2024-02-07 at 2 37 32 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/5f2447ed-84a1-4eee-8b00-f36938a5caa2">
 
