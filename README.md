@@ -4,7 +4,7 @@
 <td>
   A website using the Spotify Web API to create belonging with music! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over music they can both enjoy! <br>
   <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b> <br>
-  <b>Read about why I built this app in the "Why This App?" section!</b>
+  <b>Read about why and how I built this app in the "About This App" section!</b>
 </td>
 </tr>
 </table>
@@ -26,7 +26,7 @@
 ![Spotify](https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white)
 
 
-## Why this App?
+## About This App
 
 ## Usage
 
