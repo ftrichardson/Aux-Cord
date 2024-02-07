@@ -1,36 +1,30 @@
-# Aux Cord - music connection app
-![aux-cord-banner-updated](https://github.com/ftrichardson/aux-cord/assets/141296571/ba00f7bd-da3d-48f3-8a29-d2c75a70cc95)
+<div align="center">
+  <h1>Aux Cord - socialized music recommendation app </h1>
+  Try it out with a friend here: https://aux-cord.onrender.com/
+</div>
+<div></div>
+<img width="1362" alt="Screen Shot 2024-02-07 at 2 37 32 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/5f2447ed-84a1-4eee-8b00-f36938a5caa2">
 
-Try it out with a friend here: https://aux-cord.onrender.com/
 ## Table of Contents
-<p>
-  <a href="#description">Description</a>
-</p>
-<p>
-  <a href="#third-party-libraries-used">Third-Party Libraries Used</a>
-</p>
-<p>
-  <a href="#demo">Demo</a>
-</p>
-<p>
-  <a href="#local-installation">Installation</a>
-</p>
+- [Demo](#demo)
+- [Built With](#built-with)
+- [Extended Description](#extended-description)
+- [Usage](#usage)
 
-## Description
-This program socializes Spotify’s music recommendation system by using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, enabling Spotify users with distinct musical tastes to algorithmically discover musical commonalities (i.e. sharing the aux cord).
 
-## Third-Party Libraries Used
+## Demo
 * pandas
 * scikit-learn
 * requests
 * spotipy
 
-## Demo
+## Built With
 
 https://github.com/ftrichardson/aux-cord/assets/141296571/deda1565-3119-47c6-8b73-e72ab9633f1d
 
+## Extended Description
 
-## Local Installation
+## Usage
 
 **1.** Clone the repository and navigate to aux-cord/ui directory
 ```python
