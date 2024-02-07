@@ -15,7 +15,7 @@
 <img width="1346" alt="Screen Shot 2024-02-07 at 4 41 08 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/f802aff0-b08d-4b93-a47b-0eeda7aba996">
 
 ## Table of Contents
- [Demo](#demo)&nbsp;&#8226;&nbsp;[Built With](#built-with)&nbsp;&#8226;&nbsp;[Why this App?](#why-this-app)&nbsp;&#8226;&nbsp;[Usage](#usage)
+ [Demo](#demo)&nbsp;&#8226;&nbsp;[Built With](#built-with)&nbsp;&#8226;&nbsp;[About This App](#about-this-app)&nbsp;&#8226;&nbsp;[Usage](#usage)
 
 
 ## Demo
