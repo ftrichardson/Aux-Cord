@@ -9,7 +9,7 @@
 
 [![Django CI](https://github.com/ftrichardson/aux-cord/actions/workflows/django.yml/badge.svg)](https://github.com/ftrichardson/aux-cord/actions/workflows/django.yml)
 
-<img width="1362" alt="Screen Shot 2024-02-07 at 2 37 32 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/5f2447ed-84a1-4eee-8b00-f36938a5caa2">
+<img width="1346" alt="Screen Shot 2024-02-07 at 4 41 08 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/f802aff0-b08d-4b93-a47b-0eeda7aba996">
 
 ## Table of Contents
  [Demo](#demo)&nbsp;&#8226;&nbsp;[Built With](#built-with)&nbsp;&#8226;&nbsp;[Extended Description](#extended-description)&nbsp;&#8226;&nbsp;[Usage](#usage)
