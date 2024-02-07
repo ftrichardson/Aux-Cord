@@ -13,12 +13,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 
-# Client credentials file in .gitignore for security purposes
-with open('res/client_credentials.json', 'r') as client_credentials_file:
-    client_credentials_data = json.load(client_credentials_file)
-
-CLIENT_ID = client_credentials_data["CLIENT_ID"]
-CLIENT_SECRET = client_credentials_data["CLIENT_SECRET"]
+CLIENT_ID = "81863df5d29141039522b7aa5314f720"
+CLIENT_SECRET = "dea34b0980b449bfbf02dc971b8bf875"
 
 client_credentials_manager = SpotifyClientCredentials(CLIENT_ID,CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
