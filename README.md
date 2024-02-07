@@ -1,15 +1,9 @@
-<div align="center">
-  <h1>Aux Cord - socialized music recommendation app </h1>
-  Try it out with a friend here: https://aux-cord.onrender.com/
-</div>
-<div></div>
+<h1>Aux Cord - socializing music recommendation </h1>
+ ***Try it out with a friend here(!): https://aux-cord.onrender.com/
 <img width="1362" alt="Screen Shot 2024-02-07 at 2 37 32 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/5f2447ed-84a1-4eee-8b00-f36938a5caa2">
 
 ## Table of Contents
-- [Demo](#demo)
-- [Built With](#built-with)
-- [Extended Description](#extended-description)
-- [Usage](#usage)
+ [Demo](#demo)&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;[Built With](#built-with)&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;[Extended Description](#extended-description)&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;[Usage](#usage)
 
 
 ## Demo
