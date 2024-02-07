@@ -2,7 +2,9 @@
 <table>
 <tr>
 <td>
-  A website using the Spotify Web API to create belonging with music! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over music they can both enjoy.  <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b>
+  A website using the Spotify Web API to create belonging with music! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over music they can both enjoy. <br>
+  <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b> <br>
+  <b>Read about why I built this app below.</b>
 </td>
 </tr>
 </table>
@@ -13,7 +15,7 @@
 <img width="1346" alt="Screen Shot 2024-02-07 at 4 41 08 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/f802aff0-b08d-4b93-a47b-0eeda7aba996">
 
 ## Table of Contents
- [Demo](#demo)&nbsp;&#8226;&nbsp;[Built With](#built-with)&nbsp;&#8226;&nbsp;[Extended Description](#extended-description)&nbsp;&#8226;&nbsp;[Usage](#usage)
+ [Demo](#demo)&nbsp;&#8226;&nbsp;[Built With](#built-with)&nbsp;&#8226;&nbsp;[Why this App?](#why-this-app)&nbsp;&#8226;&nbsp;[Usage](#usage)
 
 
 ## Demo
@@ -26,7 +28,9 @@
 
 https://github.com/ftrichardson/aux-cord/assets/141296571/deda1565-3119-47c6-8b73-e72ab9633f1d
 
-## Extended Description
+## Why this App?
+
+[Go to Real Cool Heading section](#real-cool-heading)
 
 ## Usage
 
