@@ -2,7 +2,7 @@
 <table>
 <tr>
 <td>
-  A webapp using Quandl API to display history of stock growth in a given period of time. It helps predict the growth of stocks from the  charts of stock performace in any period of time. It helps to judge stocks, with the principle of momentum investing, which returns 1% per month on average. <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b>
+  A website using the Spotify Web API to create belonging with music! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over a shared playlist they can both enjoy.  <b>Try it out with a friend here(!): https://aux-cord.onrender.com/</b>
 </td>
 </tr>
 </table>
