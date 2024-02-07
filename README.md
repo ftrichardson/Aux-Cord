@@ -30,8 +30,6 @@ https://github.com/ftrichardson/aux-cord/assets/141296571/deda1565-3119-47c6-8b7
 
 ## Why this App?
 
-[Go to Real Cool Heading section](#real-cool-heading)
-
 ## Usage
 
 **1.** Clone the repository and navigate to aux-cord/ui directory
