@@ -9,6 +9,7 @@
 </table>
 
 ![](http://ForTheBadge.com/images/badges/made-with-python.svg) <br>
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Django CI](https://github.com/ftrichardson/aux-cord/actions/workflows/django.yml/badge.svg)](https://github.com/ftrichardson/aux-cord/actions/workflows/django.yml)
 
 <img width="1346" alt="Screen Shot 2024-02-07 at 4 41 08 AM" src="https://github.com/ftrichardson/aux-cord/assets/141296571/f802aff0-b08d-4b93-a47b-0eeda7aba996">
