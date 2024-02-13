@@ -2,7 +2,7 @@
 <table>
 <tr>
 <td>
-  A website using the Spotify Web API to <b>create connection and belonging with music</b>! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over new music they can both enjoy! <br>
+  A Django website using the Spotify Web API to <b>create connection and belonging with music</b>! By using machine learning (particularly decision tree classification) to output an independent playlist based on the shared musical qualities of two inputted playlists, this program lets people with distinct musical tastes bond over new music they can both enjoy! <br>
   <b>Try it out with a friend here: https://aux-cord.onrender.com/</b> <br>
 </td>
 </tr>
