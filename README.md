@@ -1,3 +1,4 @@
+
 <h1>Aux Cord - socializing music recommendation </h1>
 <table>
 <tr>
@@ -19,6 +20,9 @@
 
 
 ## Demo
+
+https://github.com/user-attachments/assets/cb6f3e78-2e31-45a1-bd1b-cc4a0eab5704
+
 
 ## Built With
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
